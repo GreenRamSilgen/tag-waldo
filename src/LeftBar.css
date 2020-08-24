@@ -1,0 +1,54 @@
+nav{
+    width: 100%;
+    height: 2.5em;
+    color: white;
+    background-color: rgb(34, 34, 34);
+    display: flex;
+    align-items: center;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+
+.sideModalBtn{
+    margin: 0px 5px;
+    cursor: pointer;
+    padding: 5px;
+}
+.sideModalBack{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(204, 204, 204, 0.363);
+    display: none;
+}
+.sideModal{
+    position: fixed;
+    height: 100vh;
+    width: 150px;
+    background-color: rgb(43, 43, 43);
+
+    display: flex;
+    flex-direction: column;
+    line-height: 3em;
+    align-items: center;
+
+    left: -150px;
+}
+
+.slideOutAnim{
+    transform: translateX(150px);
+    transition: transform 500ms ease-out;
+}
+
+.slideInAnim{
+    transform: translateX(-150px);
+    transition: transform 500ms linear;
+}
+.sideModal__contentItem{
+    color: white;
+}
+.sideModal__contentItem:active{
+    color: white;
+}
