@@ -43,10 +43,19 @@ function GetCoordinates(e)
 }
 
 export class MainContent extends React.Component{
+  constructor(props){
+    super(props);
+
+    this.imgClicked = this.imgClicked.bind(this);
+  }
+
+  imgClicked(e){
+    GetCoordinates(e);
+  }
     render(){
         return(
             <div className="imgContainer">
-                <img className="actualImg" src="https://i.pinimg.com/originals/e7/15/f7/e715f7d4c3947a1547c468dc9fac37b5.jpg" alt="waldo map" onMouseDown={GetCoordinates}/>
+                <img className="actualImg" src="https://i.pinimg.com/originals/e7/15/f7/e715f7d4c3947a1547c468dc9fac37b5.jpg" alt="waldo map" onMouseDown={this.imgClicked}/>
             </div>
         );
     }
