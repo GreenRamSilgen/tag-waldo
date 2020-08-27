@@ -1,0 +1,58 @@
+.newMapPopUp{
+    position: fixed;
+    left: 5vw;
+    top: 20vh;
+
+    display: flex;
+    flex-direction: column;
+
+    
+    width: 90vw;
+    height: 60vh;
+    background-color: rgb(70, 70, 70);
+}
+
+.mapSelect{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.1em 0.5em 0.1em 0em;
+
+    color: white;
+    background-color: rgb(44, 44, 44);
+}
+.newMapBtns{
+    padding: 0.5em;
+}
+.newMapClose{
+    cursor: pointer;
+    font-size: x-large;
+}
+
+
+
+.madMode{
+    display: flex;
+    justify-content: center;
+    font-size: large;
+    font-weight: bold;
+
+    color: white;
+}
+
+
+
+.cardHolder{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.mapCard{
+    width: 40%;
+    padding: 1em;
+}
+
+.mapCardImg{
+    width: 100%;
+    height: 100%;
+}

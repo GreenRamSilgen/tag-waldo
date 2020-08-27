@@ -4,15 +4,17 @@ import './LeftBar.css'
 class LeftBar extends React.Component{
   constructor(props) {
     super(props);
+    this.state = {
+      barClicked: false,
+    };
+
     this.barStyle = {
         display: "block",
     }
     this.removeBarStyle ={
         display: "none",
     }
-    this.state = {
-      barClicked: false,
-    };
+
 
     this.leftBarAnim = this.leftBarAnim.bind(this);
   }
@@ -25,7 +27,11 @@ class LeftBar extends React.Component{
   }
 
   render() {
-
+    if(this.state.barClicked){
+      document.querySelector("html").style.overflow = "hidden";
+    }else{
+      document.querySelector("html").style.overflow = "";
+    }
     return (
       <div>
         <nav>
@@ -36,24 +42,10 @@ class LeftBar extends React.Component{
           <div className="sideModal">
             <div className="sideModal__content">
               <div className="sideModal__contentItem">
-                <a href="#" target="__blank">
-                  HOME
-                </a>
+                <button className="leftBarBtns" onClick={this.props.newMapClick}>NEW MAP</button>
               </div>
               <div className="sideModal__contentItem">
-                <a href="#" target="__blank">
-                  PRODUCT
-                </a>
-              </div>
-              <div className="sideModal__contentItem">
-                <a href="#" target="__blank">
-                  PRICING
-                </a>
-              </div>
-              <div className="sideModal__contentItem">
-                <a href="#" target="__blank">
-                  CONTACT US
-                </a>
+                <button className="leftBarBtns" onClick={this.props.highScoreClick}>HIGH SCORE</button>
               </div>
             </div>
           </div>

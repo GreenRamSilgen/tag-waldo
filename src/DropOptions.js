@@ -2,18 +2,6 @@ import React from "react";
 import firebase from "firebase/app";
 import "firebase/firestore";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCL-J9TxH7sdarmOhZQbUgwta_pEjU1nu8",
-  authDomain: "tagwaldo-693e6.firebaseapp.com",
-  databaseURL: "https://tagwaldo-693e6.firebaseio.com",
-  projectId: "tagwaldo-693e6",
-  storageBucket: "tagwaldo-693e6.appspot.com",
-  messagingSenderId: "879524435547",
-  appId: "1:879524435547:web:ddd654dbc7161467b2517e",
-  measurementId: "G-DTWMBZL9Q2",
-};
-
-firebase.initializeApp(firebaseConfig);
 
 export class DropOptions extends React.Component {
   constructor(props) {
@@ -49,7 +37,11 @@ export class DropOptions extends React.Component {
           margins: data.Waldo,
         })){
           this.removeChar(charName);
-        }
+        
+          console.log("FOUND");
+          }else{
+            console.log("NO CHAR");
+          }
       }
 
         if(charName === 'Welma'){
@@ -58,6 +50,9 @@ export class DropOptions extends React.Component {
             margins: data.Welma,
           })){
           this.removeChar(charName);
+          console.log("FOUND");
+          }else{
+            console.log("NO CHAR");
           }
         }
 
@@ -98,7 +93,7 @@ export class DropOptions extends React.Component {
               this.state.charToFind.map((char)=>{
               if(char === "NA"){
                 return(
-              <option value="NA" selected disabled hidden> Pick </option>);}
+              <option key={"NA"} value="NA" selected disabled hidden> Pick </option>);}
               return <option key={char} value={char}>{char}</option>
             })}
           </select>

@@ -52,3 +52,14 @@ a{
 .sideModal__contentItem:active{
     color: white;
 }
+
+
+.leftBarBtns{
+    cursor: pointer;
+    width: 100%;
+    padding: 1em;
+    margin: 1em 0;
+    
+    font-size: medium;
+
+}
