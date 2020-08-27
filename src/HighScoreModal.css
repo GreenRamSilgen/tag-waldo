@@ -1,0 +1,43 @@
+.highScorePopUp{
+    position: fixed;
+    left: 5vw;
+    top: 20vh;
+
+    display: flex;
+    flex-direction: column;
+
+    
+    width: 90vw;
+    height: 60vh;
+    background-color: rgb(70, 70, 70);
+    color: white;
+}
+
+.highScorePopUp_topBar{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0.1em 0.5em 0.1em 0em;
+
+    color: white;
+    background-color: rgb(44, 44, 44);
+}
+.highScoreClose{
+    cursor: pointer;
+    font-size: x-large;
+}
+
+
+.highScoreTitle{
+    text-align: center;
+    font-size: xx-large;
+    font-weight: bold;
+    margin: 0.5em;
+}
+.highScorePopUp_content{
+    display: flex;
+    justify-content: space-evenly;
+
+    line-height: 2em;
+    font-size: large;
+}

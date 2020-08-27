@@ -4,7 +4,11 @@ nav{
     color: white;
     background-color: rgb(34, 34, 34);
     display: flex;
+    justify-content: space-between;
     align-items: center;
+}
+.barToTag{
+    display: flex;
 }
 a{
     text-decoration: none;

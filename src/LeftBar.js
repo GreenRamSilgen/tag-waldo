@@ -1,5 +1,6 @@
 import React from "react";
 import './LeftBar.css'
+import {Timer} from './Timer';
 
 class LeftBar extends React.Component{
   constructor(props) {
@@ -23,7 +24,6 @@ class LeftBar extends React.Component{
       this.setState({
           barClicked: !this.state.barClicked,
       });
-      console.log("click");
   }
 
   render() {
@@ -36,6 +36,10 @@ class LeftBar extends React.Component{
       <div>
         <nav>
           <div  onClick={this.leftBarAnim} className="sideModalBtn"><i className="fas fa-bars fa-2x"></i></div>
+          <div>{(this.props.charToFind[0] === "NA") ? "TIME TO TAG": <div className="barToTag">TAG: {this.props.charToFind.map((char)=>{
+            return <div>{char}</div>
+          })}</div>}</div>
+          {(this.props.mapObj) ? <Timer seconds={this.props.seconds}/> : "0sec"}
         </nav>
 
         <div  onClick={this.leftBarAnim} className={(this.state.barClicked) ? "sideModalBack slideOutAnim" : "sideModalBack" } style={(this.state.barClicked)? this.barStyle : this.removeBarStyle}>

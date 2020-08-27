@@ -1,0 +1,49 @@
+.gameOverPopUp{
+    position: fixed;
+    left: 5vw;
+    top: 20vh;
+
+    display: flex;
+    flex-direction: column;
+
+    
+    width: 90vw;
+    height: 60vh;
+    background-color: rgb(70, 70, 70);
+    color: white;
+}
+
+.gameOverPopUp_topBar{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0.1em 0.5em 0.1em 0em;
+
+    color: white;
+    background-color: rgb(44, 44, 44);
+}
+.gameOverPopUpClose{
+    cursor: pointer;
+    font-size: x-large;
+}
+
+.gameOverContent{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.gameOverCongratz{
+    font-size: xx-large;
+    margin: 1.5em 0em;
+}
+
+.gameOverTime{
+    font-size: xx-large;
+    margin: 1em 0em;
+}
+
+.gameOverQuestion{
+    margin: 1em;
+}

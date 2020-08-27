@@ -3,10 +3,11 @@ import "./MainContent.css";
 import { DropOptions } from "./DropOptions";
 import {LeftBar} from './LeftBar';
 import {NewMapModal} from './NewMapModal';
-
+import {GameOver} from './GameOver';
 
 import firebase from "firebase/app";
 import "firebase/firestore";
+import { HighScoreModal } from "./HighScoreModal";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCL-J9TxH7sdarmOhZQbUgwta_pEjU1nu8",
@@ -70,6 +71,14 @@ export class MainContent extends React.Component {
     super(props);
 
     this.state = {
+      seconds: 0,
+      winTime: 0,
+      gameOver: false,
+      newMapPopup:false,
+      highScorePopup: false,
+
+
+      //!TagBox
       tagBoxStyle: {
         left: "0px",
         top: "0px",
@@ -77,10 +86,10 @@ export class MainContent extends React.Component {
       tagBoxOn: false,
       posX:'',
       posY:'',
-      newMapPopup:false,
-      highScorePopup: false,
 
+      //!FETECHED MAP INFO
       mapObj:null,
+      charToFind: ["NA"],
     };
 
     this.displayNone = {
@@ -91,7 +100,11 @@ export class MainContent extends React.Component {
     this.imgClicked = this.imgClicked.bind(this);
     this.handleNewMapClick = this.handleNewMapClick.bind(this);
     this.closeNewMapPopUp = this.closeNewMapPopUp.bind(this);
+    this.handleHighScoreClick = this.handleHighScoreClick.bind(this);
+    this.closeHighScorePopUp = this.closeHighScorePopUp.bind(this);
+    this.closeGameOverPopUp = this.closeGameOverPopUp.bind(this);
     this.setMapObj = this.setMapObj.bind(this);
+    this.handleCharFound = this.handleCharFound.bind(this);
   }
 
   imgClicked(e) {
@@ -112,6 +125,14 @@ export class MainContent extends React.Component {
       });
     }
   }
+  setMapObj(obj){
+    this.setState({
+      newMapPopup:false,
+      mapObj: obj,
+      charToFind: obj.data.charactersOnMap,
+      seconds: 0,
+    })
+  }
 
   handleNewMapClick(e){
     this.setState({
@@ -123,27 +144,71 @@ export class MainContent extends React.Component {
       newMapPopup: false
     })
   }
-
-  setMapObj(obj){
+  handleHighScoreClick(){
     this.setState({
-      newMapPopup:false,
-      mapObj: obj,
+      highScorePopup: true,
     })
   }
+  closeHighScorePopUp(){
+    this.setState({
+      highScorePopup: false,
+    })
+  }
+  closeGameOverPopUp(){
+    this.setState({
+      gameOver: false,
+    })
+  }
+
+  handleCharFound(charName){ 
+    let temp = [...this.state.charToFind];
+    for(let i = 0; i < temp.length; i++){
+      if(temp[i] === charName){
+        temp.splice(i,1);
+      }
+    }
+
+    if(temp.length === 0){
+      this.setState({
+        charToFind: temp,
+        gameOver: true,
+        winTime: this.state.seconds,
+        tagBoxOn: false,
+      })
+    }else{
+      this.setState({
+        charToFind: temp
+      })
+    }
+  }
+
+  //!TIMER
+  
+  componentDidMount(){
+    this.timerID = setInterval(
+        ()=> this.tick(), 1000);
+  }
+
+  tick(){
+    this.setState({
+        seconds: this.state.seconds + 1,
+    })
+  }
+
   render() {
-    console.log(this.state.mapObj);
     return (
       <div>
-      <LeftBar newMapClick={this.handleNewMapClick}/>
+      <LeftBar seconds={this.state.seconds} charToFind={this.state.charToFind} newMapClick={this.handleNewMapClick} highScoreClick={this.handleHighScoreClick} mapObj={this.state.mapObj}/>
         
       {(this.state.newMapPopup) ? <NewMapModal setMapObj={this.setMapObj} closeNewMapPopUp={this.closeNewMapPopUp}/> : null}
-
+      {(this.state.highScorePopup)?<HighScoreModal scores={(this.state.mapObj) ? this.state.mapObj.data.highScores : null} scoresName={(this.state.mapObj) ? this.state.mapObj.data.highScoresName : null} closeHighScorePopUp={this.closeHighScorePopUp}/>:null}
+      {(this.state.gameOver) ? <GameOver winTime={this.state.winTime} closeGameOverPopUp={this.closeGameOverPopUp}/>:null}
       <div className="mainContent">
         <div className="imgContainer">
           <img
             className="actualImg"
             id="mainImg"
-            src="https://i.pinimg.com/originals/e7/15/f7/e715f7d4c3947a1547c468dc9fac37b5.jpg"
+            src={(this.state.mapObj) ? `${this.state.mapObj.data.imgUrl}` :"https://cdn0.iconfinder.com/data/icons/arrows-182/24/corner-arrow-left-top-512.png"}
             alt="waldo map"
             onMouseDown={this.imgClicked}
           />
@@ -155,10 +220,9 @@ export class MainContent extends React.Component {
             }
           >
             <div className="tagBox"></div>
-            <DropOptions posX={this.state.posX} posY={this.state.posY} />
+            <DropOptions posX={this.state.posX} posY={this.state.posY} mapObj={this.state.mapObj} charToFind={this.state.charToFind} handleCharFound={this.handleCharFound}/>
           </div>
         </div>
-        <div>{(this.state.mapObj) ?this.state.mapObj.data.imgUrl : null}</div>
       </div>
       </div>
     );
