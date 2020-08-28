@@ -231,7 +231,7 @@ export class MainContent extends React.Component {
           <img
             className="actualImg"
             id="mainImg"
-            src={(this.state.mapObj) ? `${this.state.mapObj.data.imgUrl}` :"https://cdn0.iconfinder.com/data/icons/arrows-182/24/corner-arrow-left-top-512.png"}
+            src={(this.state.mapObj) ? `${this.state.mapObj.data.imgUrl}` :"https://firebasestorage.googleapis.com/v0/b/tagwaldo-693e6.appspot.com/o/waldoInstructions.png?alt=media&token=d33220e4-0a96-49de-a10c-f9da9d651e7b"}
             alt="waldo map"
             onMouseDown={this.imgClicked}
           />
