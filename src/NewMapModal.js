@@ -23,21 +23,23 @@ export class NewMapModal extends React.Component{
 
     getEzMap(){
         this.setUpMaps("easyMap");
+        this.props.setEzMap();
     }
 
     getMedMap(){
         this.setUpMaps("medMap");
+        this.props.setMedMap();
     }
 
     getHardMap(){
         this.setUpMaps("hardMap");
+        this.props.setHardMap();
     }
 
     setUpMaps(type){
         let tempMaps = [];
         firebase.firestore().collection(type).get().then((querySnapshot)=>{
             querySnapshot.forEach(function(doc){
-                //console.log(doc.id, "=>", doc.data());
                 let obj = {
                     id: doc.id,
                     data: doc.data(),
@@ -55,6 +57,7 @@ export class NewMapModal extends React.Component{
         this.props.setMapObj(obj);
     }
     render(){
+        let i = 0;
         return(
             <div className="newMapPopUp">
             <div className="mapSelect">
@@ -72,9 +75,8 @@ export class NewMapModal extends React.Component{
             </div>
             <div className="cardHolder">
             {this.state.allMaps.map((obj)=>{
-                console.log("SOMEOBJ:"+obj.id);
                 return(
-                    <div className="mapCard" key={obj.id}>
+                    <div className="mapCard" key={i++}>
                         <img className="mapCardImg" onClick={(e)=>{this.mapSelected(e,obj)}} src={obj.data.imgUrl} alt="waldo map"></img>
                     </div>
                 );

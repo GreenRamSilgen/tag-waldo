@@ -89,6 +89,7 @@ export class MainContent extends React.Component {
 
       //!FETECHED MAP INFO
       mapObj:null,
+      mapType: "easyMap",
       charToFind: ["NA"],
     };
 
@@ -105,6 +106,10 @@ export class MainContent extends React.Component {
     this.closeGameOverPopUp = this.closeGameOverPopUp.bind(this);
     this.setMapObj = this.setMapObj.bind(this);
     this.handleCharFound = this.handleCharFound.bind(this);
+
+    this.setEzMap = this.setEzMap.bind(this);
+    this.setMedMap = this.setMedMap.bind(this);
+    this.setHardMap = this.setHardMap.bind(this);
   }
 
   imgClicked(e) {
@@ -125,6 +130,24 @@ export class MainContent extends React.Component {
       });
     }
   }
+  setEzMap(){
+        this.setState({
+          mapType: "easyMap"
+        });
+    }
+
+    setMedMap(){
+      this.setState({
+          mapType: "medMap"
+        });
+    }
+
+    setHardMap(){
+      this.setState({
+          mapType: "hardMap"
+        });
+    }
+
   setMapObj(obj){
     this.setState({
       newMapPopup:false,
@@ -200,9 +223,9 @@ export class MainContent extends React.Component {
       <div>
       <LeftBar seconds={this.state.seconds} charToFind={this.state.charToFind} newMapClick={this.handleNewMapClick} highScoreClick={this.handleHighScoreClick} mapObj={this.state.mapObj}/>
         
-      {(this.state.newMapPopup) ? <NewMapModal setMapObj={this.setMapObj} closeNewMapPopUp={this.closeNewMapPopUp}/> : null}
+      {(this.state.newMapPopup) ? <NewMapModal setMapObj={this.setMapObj} closeNewMapPopUp={this.closeNewMapPopUp} setEzMap={this.setEzMap} setMedMap={this.setMedMap} setHardMap={this.setHardMap}/> : null}
       {(this.state.highScorePopup)?<HighScoreModal scores={(this.state.mapObj) ? this.state.mapObj.data.highScores : null} scoresName={(this.state.mapObj) ? this.state.mapObj.data.highScoresName : null} closeHighScorePopUp={this.closeHighScorePopUp}/>:null}
-      {(this.state.gameOver) ? <GameOver winTime={this.state.winTime} closeGameOverPopUp={this.closeGameOverPopUp}/>:null}
+      {(this.state.gameOver) ? <GameOver winTime={this.state.winTime} mapType={this.state.mapType} mapObj={this.state.mapObj} closeGameOverPopUp={this.closeGameOverPopUp}/>:null}
       <div className="mainContent">
         <div className="imgContainer">
           <img

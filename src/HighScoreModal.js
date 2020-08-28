@@ -1,5 +1,5 @@
 import React from 'react';
-import './GameOver.css';
+import './HighScoreModal.css';
 
 
 export class HighScoreModal extends React.Component{
